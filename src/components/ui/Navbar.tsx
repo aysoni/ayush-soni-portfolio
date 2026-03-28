@@ -45,7 +45,7 @@ export function Navbar() {
       <nav id="navbar">
         <Link href="/" className="nav-logo">
           <span className="king-crown" aria-hidden>
-            &#9812;
+            &lt;/&gt;
           </span>
           &nbsp;{personal.navLogo}
           <span style={{ color: 'var(--muted)' }}>.dev</span>
