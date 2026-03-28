@@ -1045,3 +1045,54 @@ footer {
   border-color: var(--border);
   color: #334155;
 }
+
+.hamburger {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 22px;
+  background: #f5b400;
+  transition: all 0.3s ease;
+}
+
+/* Transform into X */
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Hide hamburger on desktop */
+.hamburger {
+  display: none;
+}
+
+/* Show hamburger on mobile */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}

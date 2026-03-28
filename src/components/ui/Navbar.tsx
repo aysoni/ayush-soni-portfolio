@@ -24,25 +24,27 @@ export function Navbar() {
     }
   }, [open])
 
-  const closeMob = () => setOpen(false)
+  const toggleMenu = () => setOpen(!open)
+  const closeMenu = () => setOpen(false)
 
   return (
     <>
-      <div className={`mob-menu${open ? ' open' : ''}`} id="mobMenu" aria-hidden={!open}>
-        <button type="button" className="mob-close" id="mobClose" onClick={closeMob} aria-label="Close menu">
-          <i className="fas fa-times" />
-        </button>
+      {/* Mobile Menu */}
+      <div className={`mob-menu ${open ? 'open' : ''}`} aria-hidden={!open}>
         {mainLinks.map((l) => (
-          <Link key={l.href} href={l.href} onClick={closeMob}>
+          <Link key={l.href} href={l.href} onClick={closeMenu}>
             {l.label}
           </Link>
         ))}
-        <Link href="/#contact" onClick={closeMob}>
+
+        <Link href="/#contact" onClick={closeMenu}>
           Contact
         </Link>
       </div>
 
+      {/* Navbar */}
       <nav id="navbar">
+        {/* Logo */}
         <Link href="/" className="nav-logo">
           <span className="king-crown" aria-hidden>
             &lt;/&gt;
@@ -50,6 +52,8 @@ export function Navbar() {
           &nbsp;{personal.navLogo}
           <span style={{ color: 'var(--muted)' }}>.dev</span>
         </Link>
+
+        {/* Desktop Links */}
         <ul className="nav-links">
           {mainLinks.map((l) => (
             <li key={l.href}>
@@ -62,14 +66,17 @@ export function Navbar() {
             </Link>
           </li>
         </ul>
+
+        {/* Right Side */}
         <div className="nav-end">
           <ThemeToggle />
+
+          {/* Hamburger */}
           <button
             type="button"
-            className="hamburger"
-            id="hamburger"
-            aria-label="Open menu"
-            onClick={() => setOpen(true)}
+            className={`hamburger ${open ? 'active' : ''}`}
+            aria-label="Toggle menu"
+            onClick={toggleMenu}
           >
             <span />
             <span />
