@@ -17,7 +17,7 @@ export function About() {
             <div className="about-avatar">
               <span aria-hidden>&#129489;&#8205;&#128187;</span>
               <p>
-                {first} {rest.join(' ').toUpperCase()}
+                {first.toUpperCase()} {rest.join(' ').toUpperCase()}
               </p>
             </div>
             <div className="about-info">
