@@ -1086,13 +1086,13 @@ footer {
   display: none;
 }
 
-/* Show hamburger on mobile */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-
+/* Tablet + Mobile */
+@media (max-width: 1024px) {
   .nav-links {
     display: none;
+  }
+
+  .hamburger {
+    display: flex;
   }
 }
