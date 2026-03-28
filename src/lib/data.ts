@@ -23,9 +23,9 @@ export const typedPhrases = [
 
 export const heroStats = [
   { value: '2.4+', label: 'Years Exp.' },
+  { value: '15+', label: 'Projects' },
   { value: '30%', label: 'API Latency ↓' },
-  { value: '40%', label: 'Report Time ↓' },
-  { value: '50%', label: 'Manual Steps ↓' },
+  { value: '500+', label: 'Commits' },
 ]
 
 export const stats = [
