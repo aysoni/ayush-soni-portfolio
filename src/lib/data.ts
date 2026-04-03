@@ -73,18 +73,26 @@ export const skillRatings = [
 
 export const experience = [
   {
-    role: 'Associate Engineer',
+    role: 'Engineer',
     company: 'Virtusa',
     location: 'Pune, India',
-    period: 'Jan 2024 – Present',
+    period: 'Jan 2026 – Present',
     bullets: [
-      'Designed & maintained enterprise-grade Spring Boot microservices and REST APIs powering IT governance and discrepancy management platforms.',
-      'Improved API response time by <span class="highlight">30%</span> via SQL query optimisation, strategic indexing, and targeted database tuning across Oracle & PostgreSQL.',
-      'Reduced report generation time by <span class="highlight">40%</span> by rewriting complex queries, eliminating redundant joins and leveraging indexed views.',
       'Led root cause analysis and resolution of P1/P2 production incidents, restoring SLA compliance and improving MTTR.',
       'Implemented OAuth2 & JWT-based authentication within Spring Security to secure REST APIs across microservices boundaries.',
       'Integrated <span class="highlight">Apache Kafka</span> for async event-driven communication, improving system decoupling and throughput.',
       'Contributed to CI/CD pipeline maintenance via Jenkins and GitLab across QA, DevOps, and business stakeholders.',
+    ],
+  },
+  {
+    role: 'Associate Engineer',
+    company: 'Virtusa',
+    location: 'Pune, India',
+    period: 'Jan 2024 – Dec 2025',
+    bullets: [
+      'Designed & maintained enterprise-grade Spring Boot microservices and REST APIs powering IT governance and discrepancy management platforms.',
+      'Improved API response time by <span class="highlight">30%</span> via SQL query optimisation, strategic indexing, and targeted database tuning across Oracle & PostgreSQL.',
+      'Reduced report generation time by <span class="highlight">40%</span> by rewriting complex queries, eliminating redundant joins and leveraging indexed views.',
     ],
   },
   {
