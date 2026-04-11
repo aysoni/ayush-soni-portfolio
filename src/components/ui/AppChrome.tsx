@@ -18,8 +18,8 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
         <Navbar />
         <main>{children}</main>
         <footer>
-          <div className="fn">&#9812; Ayush Soni</div>
-          <div className="fc">© 2026 — Backend Software Engineer · Built with Next.js</div>
+          <div className="fn">&lt;/&gt; Ayush Soni</div>
+          <div className="fc">© 2026 — Backend Software Engineer </div>
         </footer>
       </div>
     </>
