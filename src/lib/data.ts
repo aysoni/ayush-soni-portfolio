@@ -1,7 +1,7 @@
 export const personal = {
   name: 'Ayush Soni',
   role: 'Backend Software Engineer',
-  tagline: 'I build scalable microservices and enterprise-grade APIs that power mission-critical platforms.',
+  tagline: 'I build scalable microservices and AI-augmented backend systems that power mission-critical platforms.',
   email: 'soniayush2104@gmail.com',
   phone: '+91 8690678559',
   location: 'Pune, India',
@@ -18,18 +18,19 @@ export const typedPhrases = [
   'Backend Software Engineer',
   'Microservices Architect',
   'Spring Boot Developer',
+  'AI-Augmented Engineer',
   'Systems Builder',
 ]
 
 export const heroStats = [
-  { value: '2.4+', label: 'Years Exp.' },
+  { value: '2.8+', label: 'Years Exp.' },
   { value: '15+', label: 'Projects' },
   { value: '30%', label: 'API Latency ↓' },
   { value: '500+', label: 'Commits' },
 ]
 
 export const stats = [
-  { label: 'Experience', value: '2.4+', description: 'Years in production systems' },
+  { label: 'Experience', value: '2.8+', description: 'Years in production systems' },
   { label: 'Projects', value: '10+', description: 'Live enterprise applications' },
   { label: 'Skills', value: '15+', description: 'Production technologies' },
   { label: 'Commits', value: '5K+', description: 'Active development' },
@@ -39,11 +40,12 @@ export const aboutParagraphs = [
   `I'm a <strong>Backend Software Engineer</strong> at Virtusa, Pune, focused on enterprise Spring Boot microservices, Kafka-driven workflows, and secure REST APIs for IT governance and discrepancy platforms.`,
   `I care about <strong>performance and reliability</strong> — from SQL tuning and indexing to OAuth2/JWT and production incident response.`,
   `Recent impact: <strong>~30% faster APIs</strong>, <strong>~40% quicker reports</strong>, and significant reduction in manual steps via Camunda BPM automation.`,
+  `I also lean on <strong>AI-assisted development tools</strong> like Claude and Amazon Q to accelerate boilerplate scaffolding, debugging, and code review — shipping faster without cutting corners on quality.`,
 ]
 
 export const aboutTags = [
   'Java 11', 'Spring Boot', 'Microservices', 'Kafka', 'PostgreSQL', 'Oracle SQL',
-  'Camunda BPM', 'Docker', 'Jenkins', 'CI/CD', 'JUnit', 'OAuth2',
+  'Camunda BPM', 'Docker', 'Jenkins', 'CI/CD', 'JUnit', 'OAuth2', 'AI-Assisted Dev',
 ]
 
 export const skillGroups = [
@@ -51,8 +53,10 @@ export const skillGroups = [
   { title: 'Frameworks & Libraries', tags: ['Spring Boot', 'Spring MVC', 'Spring Security', 'Hibernate / JPA', 'React'] },
   { title: 'Databases', tags: ['Oracle SQL', 'PostgreSQL'] },
   { title: 'Messaging & Workflow', tags: ['Apache Kafka', 'Camunda BPM'] },
-  { title: 'DevOps & Cloud', tags: ['Jenkins', 'CI/CD Pipelines', 'GitLab', 'Docker', 'Linux'] },
-  { title: 'Security & Testing', tags: ['OAuth2', 'JWT', 'RBAC', 'JUnit', 'Redis', 'Postman'] },
+  { title: 'DevOps & Cloud', tags: ['Git', 'GitLab', 'Jenkins', 'CI/CD Pipelines', 'Docker', 'Linux'] },
+  { title: 'AI-Augmented Development', tags: ['Claude (Anthropic)', 'Amazon Q Developer', 'Prompt Engineering', 'AI Code Review'] },
+  { title: 'Security & Testing', tags: ['OAuth2', 'JWT', 'RBAC', 'JUnit', 'Redis'] },
+  { title: 'Tools & IDEs', tags: ['Maven', 'IntelliJ IDEA', 'WebLogic', 'Postman'] },
 ]
 
 /** 0–10 scale for animated skill bars */
