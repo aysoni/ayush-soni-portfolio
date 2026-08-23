@@ -71,6 +71,11 @@ export const skillRatings = [
   { name: 'Redis', icon: 'fas fa-bolt', filled: 6, total: 10 },
 ]
 
+/**
+ * Each experience entry can optionally include a `projects` array —
+ * client engagements delivered during that role. Render these nested
+ * under the role (e.g. indented sub-cards) in the Experience section.
+ */
 export const experience = [
   {
     role: 'Engineer',
@@ -83,6 +88,20 @@ export const experience = [
       'Integrated <span class="highlight">Apache Kafka</span> for async event-driven communication, improving system decoupling and throughput.',
       'Contributed to CI/CD pipeline maintenance via Jenkins and GitLab across QA, DevOps, and business stakeholders.',
     ],
+    projects: [
+      {
+        client: 'BT GROUP',
+        name: 'OR IT Governance Dashboard',
+        desc: 'Core backend developer for BT Group\'s enterprise IT Governance Dashboard — monitoring compliance and operational risk across large-scale infrastructure.',
+        tech: ['Java', 'Spring Boot', 'WebLogic', 'Oracle SQL', 'Hibernate/JPA'],
+        metrics: [
+          '⚡ ~35% improvement in data processing via Oracle SQL schema optimisation',
+          '🚀 30% faster API response time through strategic indexing and targeted database tuning',
+          '🔒 Led Vulnerability Management module for automated security risk analysis',
+          '🌐 RESTful APIs consumed by front-end dashboards with consistent sub-second response times',
+        ],
+      },
+    ],
   },
   {
     role: 'Associate Engineer',
@@ -93,6 +112,20 @@ export const experience = [
       'Designed & maintained enterprise-grade Spring Boot microservices and REST APIs powering IT governance and discrepancy management platforms.',
       'Improved API response time by <span class="highlight">30%</span> via SQL query optimisation, strategic indexing, and targeted database tuning across Oracle & PostgreSQL.',
       'Reduced report generation time by <span class="highlight">40%</span> by rewriting complex queries, eliminating redundant joins and leveraging indexed views.',
+    ],
+    projects: [
+      {
+        client: 'BT GROUP',
+        name: 'OR Imperium Platform',
+        desc: 'Backend microservices for automated discrepancy detection between network topology and inventory datasets, processing millions of records per run.',
+        tech: ['Spring Boot', 'PostgreSQL', 'Microservices', 'Kafka', 'Camunda BPM'],
+        metrics: [
+          '🤖 ~50% reduction in manual intervention via Camunda BPM workflow automation',
+          '📉 40% faster report generation by rewriting complex PostgreSQL queries',
+          '📡 Kafka for fault-tolerant high-throughput event streaming',
+          '🗃️ Optimised PostgreSQL schema design for high-volume batch comparisons with minimal latency',
+        ],
+      },
     ],
   },
   {
@@ -108,37 +141,31 @@ export const experience = [
   },
 ]
 
+/** Personal projects only — client work now lives under `experience[].projects` */
 export const projects = [
   {
     num: '01',
-    client: 'BT GROUP',
-    name: 'OR IT Governance Dashboard',
-    desc: 'Core backend developer for BT Group\'s enterprise IT Governance Dashboard — monitoring compliance and operational risk across large-scale infrastructure.',
-    tech: ['Java', 'Spring Boot', 'WebLogic', 'Oracle SQL', 'Hibernate/JPA'],
+    client: 'PERSONAL PROJECT',
+    name: 'TaskFlow — Team Task-Board Platform',
+    desc: 'Dockerized team task-board platform with a React frontend, two independent Spring Boot microservices, an Nginx API gateway, and per-service PostgreSQL databases.',
+    tech: ['Java', 'Spring Boot', 'React', 'PostgreSQL', 'Docker', 'Nginx'],
     metrics: [
-      '⚡ ~35% improvement in data processing via Oracle SQL schema optimisation',
-      '🔒 Led Vulnerability Management module for automated security risk analysis',
+      '🧩 Service-owned databases & API gateway enforcing clear microservice boundaries',
+      '🔐 JWT-based authentication and REST APIs for account, project, and task management',
+      '🚀 Dockerized across local, free-tier, and production environments with automatic HTTPS via Caddy',
+      '🔁 CI/CD-ready workflow with independent service builds and tagged container image deploys',
     ],
   },
   {
     num: '02',
-    client: 'DISCREPANCY DETECTION',
-    name: 'OR Imperium Platform',
-    desc: 'Backend microservices for automated discrepancy detection between network topology and inventory datasets, processing millions of records per run.',
-    tech: ['Spring Boot', 'PostgreSQL', 'Microservices', 'Kafka', 'Camunda BPM'],
-    metrics: [
-      '🤖 ~50% reduction in manual intervention via Camunda BPM workflow automation',
-      '📡 Kafka for fault-tolerant high-throughput event streaming',
-    ],
-  },
-  {
-    num: '03',
     client: 'PERSONAL PROJECT',
     name: 'Social Media Backend Platform',
     desc: 'RESTful backend microservices for user management, posts, likes, and comments — designed for horizontal scalability and long-term maintainability.',
     tech: ['Java', 'Spring Boot', 'REST API', 'PostgreSQL', 'JUnit'],
     metrics: [
       '📊 25% improvement in DB query performance via strategic indexing',
+      '🧱 RESTful microservices for user management, posts, likes, and comments',
+      '♾️ Stateless REST APIs improving horizontal scalability and long-term maintainability',
       '📄 Server-side pagination & sorting to reduce payload size under load',
     ],
   },
@@ -183,4 +210,3 @@ export const blogPosts = [
     tags: ['Camunda', 'BPM', 'Automation'],
   },
 ]
-

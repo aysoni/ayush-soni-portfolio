@@ -25,6 +25,32 @@ export function Experience() {
                   <li key={j} dangerouslySetInnerHTML={{ __html: b }} />
                 ))}
               </ul>
+
+              {exp.projects && exp.projects.length > 0 && (
+                <div className="exp-projects">
+                  {exp.projects.map((proj) => (
+                    <div key={proj.name} className="exp-project">
+                      <div className="exp-project-header">
+                        <span className="exp-project-client">{proj.client}</span>
+                        <span className="exp-project-name">{proj.name}</span>
+                      </div>
+                      <p className="exp-project-desc">{proj.desc}</p>
+                      <div className="exp-project-tech">
+                        {proj.tech.map((t) => (
+                          <span key={t} className="exp-project-tech-tag">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                      <ul className="exp-project-metrics">
+                        {proj.metrics.map((m, k) => (
+                          <li key={k}>{m}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>

@@ -506,6 +506,116 @@ nav {
 }
 
 /* EXPERIENCE */
+.exp-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+ 
+.exp-project {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  overflow: hidden;
+}
+ 
+.exp-project::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+}
+ 
+.exp-project-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+ 
+.exp-project-client {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--jade);
+}
+ 
+.exp-project-client::after {
+  content: '/';
+  margin: 0 10px;
+  color: var(--muted);
+  opacity: 0.5;
+  font-family: var(--mono);
+}
+ 
+.exp-project-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: var(--serif);
+  color: var(--text);
+}
+ 
+.exp-project-desc {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--muted);
+  font-weight: 400;
+  margin: 0 0 14px;
+}
+ 
+.exp-project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+ 
+/* Mirrors .tc exactly, so tech chips read as the same component */
+.exp-project-tech-tag {
+  font-size: 0.64rem;
+  font-family: var(--mono);
+  padding: 4px 9px;
+  border-radius: 3px;
+  background: rgba(245, 197, 24, 0.07);
+  color: var(--gold);
+  border: 1px solid rgba(245, 197, 24, 0.17);
+  letter-spacing: 0.04em;
+}
+ 
+.exp-project-metrics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+ 
+/* Mirrors .proj-metric exactly */
+.exp-project-metrics li {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+}
+ 
+[data-theme="light"] .exp-project-metrics li {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: var(--border);
+  color: #334155;
+}
+
 .experience { background: var(--bg); }
 
 .timeline { max-width: 920px; position: relative; }
