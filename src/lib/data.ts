@@ -37,7 +37,7 @@ export const stats = [
 ]
 
 export const aboutParagraphs = [
-  `I'm a <strong>Backend Software Engineer</strong> at Virtusa, Pune, focused on enterprise Spring Boot microservices, Kafka-driven workflows, and secure REST APIs for IT governance and discrepancy platforms.`,
+  `I'm a <strong>Backend Software Engineer</strong> at Virtusa, Pune, focused on enterprise Spring Boot microservices, Kafka-driven workflows, and secure REST APIs for enterprise IT governance and data-reconciliation platforms.`,
   `I care about <strong>performance and reliability</strong> — from SQL tuning and indexing to OAuth2/JWT and production incident response.`,
   `Recent impact: <strong>~30% faster APIs</strong>, <strong>~40% quicker reports</strong>, and significant reduction in manual steps via Camunda BPM automation.`,
   `I also lean on <strong>AI-assisted development tools</strong> like Claude and Amazon Q to accelerate boilerplate scaffolding, debugging, and code review — shipping faster without cutting corners on quality.`,
@@ -79,6 +79,9 @@ export const skillRatings = [
  * Each experience entry can optionally include a `projects` array —
  * client engagements delivered during that role. Render these nested
  * under the role (e.g. indented sub-cards) in the Experience section.
+ *
+ * NOTE: Client names and internal system codenames have been generalized
+ * below to respect employer/client confidentiality (NDA) obligations.
  */
 export const experience = [
   {
@@ -94,14 +97,14 @@ export const experience = [
     ],
     projects: [
       {
-        client: 'BT GROUP',
-        name: 'OR IT Governance Dashboard',
-        desc: 'Core backend developer for BT Group\'s enterprise IT Governance Dashboard — monitoring compliance and operational risk across large-scale infrastructure.',
+        client: 'Global Telecommunications Client',
+        name: 'IT Governance Dashboard',
+        desc: 'Core backend developer for an enterprise IT Governance Dashboard for a large telecommunications client — supporting visibility into compliance and operational risk across enterprise infrastructure.',
         tech: ['Java', 'Spring Boot', 'WebLogic', 'Oracle SQL', 'Hibernate/JPA'],
         metrics: [
           '⚡ ~35% improvement in data processing via Oracle SQL schema optimisation',
           '🚀 30% faster API response time through strategic indexing and targeted database tuning',
-          '🔒 Led Vulnerability Management module for automated security risk analysis',
+          '🔒 Contributed to a security risk analysis module supporting compliance reporting',
           '🌐 RESTful APIs consumed by front-end dashboards with consistent sub-second response times',
         ],
       },
@@ -119,9 +122,9 @@ export const experience = [
     ],
     projects: [
       {
-        client: 'BT GROUP',
-        name: 'OR Imperium Platform',
-        desc: 'Backend microservices for automated discrepancy detection between network topology and inventory datasets, processing millions of records per run.',
+        client: 'Global Telecommunications Client',
+        name: 'Network Discrepancy Detection Platform',
+        desc: 'Backend microservices supporting automated discrepancy detection between network topology and inventory datasets for a large-scale enterprise environment.',
         tech: ['Spring Boot', 'PostgreSQL', 'Microservices', 'Kafka', 'Camunda BPM'],
         metrics: [
           '🤖 ~50% reduction in manual intervention via Camunda BPM workflow automation',
