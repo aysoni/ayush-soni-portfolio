@@ -383,7 +383,8 @@ nav {
 }
 
 [data-theme="light"] nav {
-  background: rgba(244,241,234,0.9);
+  background: var(--card);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.10);
 }
 
 .nav-logo {
