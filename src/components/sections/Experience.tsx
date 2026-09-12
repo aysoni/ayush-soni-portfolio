@@ -1,19 +1,57 @@
 'use client'
 
+import { useRef } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import { experience, certifications } from '@/lib/data'
-import { Reveal } from '@/components/ui/Reveal'
+import { cardVariant, fadeInUp, staggerContainer } from '@/lib/motion'
 
 export function Experience() {
+  const timelineRef = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ['start 80%', 'end 45%'],
+  })
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 25,
+    restDelta: 0.001,
+  })
+
   return (
     <section className="experience" id="experience">
       <div className="sl">02 — Career</div>
       <div className="st">
         Work <span>Experience</span>
       </div>
-      <Reveal>
-        <div className="timeline">
+
+      <div ref={timelineRef} className="timeline">
+        {/* Static track */}
+        <div className="timeline-track" aria-hidden />
+
+        {/* Scroll-linked dynamic beam */}
+        <motion.div
+          className="timeline-beam"
+          aria-hidden
+          style={{
+            scaleY,
+            height: '100%',
+          }}
+        />
+
+        <motion.div
+          variants={staggerContainer(0.18, 0.05)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+        >
           {experience.map((exp) => (
-            <div key={exp.role + exp.period} className="exp-item">
+            <motion.div
+              key={exp.role + exp.period}
+              className="exp-item"
+              variants={cardVariant}
+            >
               <div className="exp-dot" />
               <div className="exp-meta">
                 <span className="exp-company">{exp.company}</span>
@@ -51,29 +89,33 @@ export function Experience() {
                   ))}
                 </div>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </Reveal>
+        </motion.div>
+      </div>
 
       <div className="sl" style={{ marginTop: 64 }}>
         Certifications
       </div>
-      <Reveal>
-        <div className="cert-grid">
-          {certifications.map((c) => (
-            <div key={c.name} className="cert-card">
-              <div className="cert-icon">
-                <i className={c.iconClass} />
-              </div>
-              <div>
-                <div className="cert-name">{c.name}</div>
-                <div className="cert-org">{c.issuer}</div>
-              </div>
+      <motion.div
+        className="cert-grid"
+        variants={staggerContainer(0.12, 0.05)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+      >
+        {certifications.map((c) => (
+          <motion.div key={c.name} className="cert-card" variants={fadeInUp}>
+            <div className="cert-icon">
+              <i className={c.iconClass} />
             </div>
-          ))}
-        </div>
-      </Reveal>
+            <div>
+              <div className="cert-name">{c.name}</div>
+              <div className="cert-org">{c.issuer}</div>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   )
 }

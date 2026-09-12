@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic'
 import { Cursor } from '@/components/ui/Cursor'
 import { Navbar } from '@/components/ui/Navbar'
+import { MotionProvider } from '@/components/ui/MotionProvider'
 
 const BackgroundCanvas = dynamic(
   () => import('@/components/ui/BackgroundCanvas').then((m) => m.BackgroundCanvas),
@@ -11,7 +12,7 @@ const BackgroundCanvas = dynamic(
 
 export function AppChrome({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <MotionProvider>
       <BackgroundCanvas />
       <Cursor />
       <div className="wrapper">
@@ -22,6 +23,6 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
           <div className="fc">© 2026 — Backend Software Engineer </div>
         </footer>
       </div>
-    </>
+    </MotionProvider>
   )
 }

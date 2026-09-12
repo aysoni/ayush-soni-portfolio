@@ -1,12 +1,28 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
 export function BackgroundCanvas() {
   const ref = useRef<HTMLCanvasElement>(null)
+  const [shouldRender, setShouldRender] = useState(false)
 
   useEffect(() => {
+    // Check for reduced motion, touch-only device, or low-power hardware
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const isTouchOnly = window.matchMedia('(pointer: coarse)').matches && !window.matchMedia('(pointer: fine)').matches
+    const isLowPower = typeof navigator !== 'undefined' && 'hardwareConcurrency' in navigator && (navigator.hardwareConcurrency as number) <= 2
+
+    if (prefersReducedMotion || isTouchOnly || isLowPower) {
+      return
+    }
+
+    setShouldRender(true)
+  }, [])
+
+  useEffect(() => {
+    if (!shouldRender) return
+
     const canvas = ref.current
     if (!canvas) return
 
@@ -97,12 +113,15 @@ export function BackgroundCanvas() {
       camera.updateProjectionMatrix()
     }
 
-    document.addEventListener('mousemove', onMove)
+    document.addEventListener('mousemove', onMove, { passive: true })
     window.addEventListener('resize', onResize)
 
     const clk = new THREE.Clock()
     let rafId = 0
+    let isPaused = false
+
     function anim() {
+      if (isPaused) return
       rafId = requestAnimationFrame(anim)
       const t = clk.getElapsedTime()
       pts.rotation.y = t * 0.016
@@ -115,10 +134,26 @@ export function BackgroundCanvas() {
       })
       renderer.render(scene, camera)
     }
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        isPaused = true
+        cancelAnimationFrame(rafId)
+      } else {
+        if (isPaused) {
+          isPaused = false
+          clk.start() // reset delta
+          anim()
+        }
+      }
+    }
+
+    document.addEventListener('visibilitychange', onVisibilityChange)
     anim()
 
     return () => {
       cancelAnimationFrame(rafId)
+      document.removeEventListener('visibilitychange', onVisibilityChange)
       document.removeEventListener('mousemove', onMove)
       window.removeEventListener('resize', onResize)
       pts.geometry.dispose()
@@ -129,7 +164,11 @@ export function BackgroundCanvas() {
       })
       renderer.dispose()
     }
-  }, [])
+  }, [shouldRender])
+
+  if (!shouldRender) {
+    return null
+  }
 
   return (
     <canvas

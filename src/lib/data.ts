@@ -59,21 +59,48 @@ export const skillGroups = [
   { title: 'Tools & IDEs', tags: ['Maven', 'IntelliJ IDEA', 'WebLogic', 'Postman'] },
 ]
 
-/** 0–10 scale for animated skill bars */
-export const skillRatings = [
-  { name: 'Java 11', icon: 'fab fa-java', filled: 8, total: 10 },
-  { name: 'Spring Boot', icon: 'fas fa-leaf', filled: 9, total: 10 },
-  { name: 'Microservices', icon: 'fas fa-shield-alt', filled: 8, total: 10 },
-  { name: 'Oracle / PostgreSQL', icon: 'fas fa-database', filled: 8, total: 10 },
-  { name: 'Apache Kafka', icon: 'fas fa-stream', filled: 8, total: 10 },
-  { name: 'Camunda BPM', icon: 'fas fa-project-diagram', filled: 7, total: 10 },
-  { name: 'Docker', icon: 'fab fa-docker', filled: 7, total: 10 },
-  { name: 'Spring Security / JWT', icon: 'fas fa-lock', filled: 8, total: 10 },
-  { name: 'React', icon: 'fab fa-react', filled: 6, total: 10 },
-  { name: 'JUnit / Testing', icon: 'fas fa-vials', filled: 8, total: 10 },
-  { name: 'CI/CD (Jenkins)', icon: 'fas fa-code-branch', filled: 7, total: 10 },
-  { name: 'Redis', icon: 'fas fa-bolt', filled: 6, total: 10 },
+export interface SkillItem {
+  name: string
+  icon: string
+  tier: 'Production' | 'Strong' | 'Working Knowledge'
+  tools: string[]
+  filled: number
+  total: number
+}
+
+export interface SkillGroup {
+  tier: string
+  description: string
+  skills: SkillItem[]
+}
+
+export const skillCapabilities: SkillGroup[] = [
+  {
+    tier: 'Production Experience',
+    description: 'Technologies powering enterprise systems, SLA compliance, and mission-critical APIs.',
+    skills: [
+      { name: 'Java 11 / SE', icon: 'fab fa-java', tier: 'Production', tools: ['Streams', 'Multithreading', 'JVM Tuning'], filled: 5, total: 5 },
+      { name: 'Spring Boot & Microservices', icon: 'fas fa-leaf', tier: 'Production', tools: ['Spring Security', 'REST APIs', 'Spring Data JPA'], filled: 5, total: 5 },
+      { name: 'Oracle SQL & PostgreSQL', icon: 'fas fa-database', tier: 'Production', tools: ['Query Optimization', 'Composite Indexes', 'Schema Design'], filled: 5, total: 5 },
+      { name: 'Apache Kafka', icon: 'fas fa-stream', tier: 'Production', tools: ['Event Streaming', 'Consumer Groups', 'Decoupled Pipelines'], filled: 4, total: 5 },
+      { name: 'Spring Security & OAuth2', icon: 'fas fa-lock', tier: 'Production', tools: ['JWT Authentication', 'RBAC', 'Stateless API Security'], filled: 4, total: 5 },
+      { name: 'JUnit & Service Testing', icon: 'fas fa-vials', tier: 'Production', tools: ['Unit Testing', 'Regression Suites', 'Mockito'], filled: 4, total: 5 },
+    ],
+  },
+  {
+    tier: 'Working Knowledge',
+    description: 'Workflow orchestration, container infrastructure, and supporting frameworks.',
+    skills: [
+      { name: 'Camunda BPM', icon: 'fas fa-project-diagram', tier: 'Working Knowledge', tools: ['Workflow Automation', 'BPMN 2.0', 'Task Workers'], filled: 4, total: 5 },
+      { name: 'Docker & CI/CD Pipelines', icon: 'fab fa-docker', tier: 'Working Knowledge', tools: ['Containerization', 'Jenkins', 'GitLab CI'], filled: 4, total: 5 },
+      { name: 'Redis Caching', icon: 'fas fa-bolt', tier: 'Working Knowledge', tools: ['Session Store', 'In-Memory Cache', 'Spring Cache'], filled: 3, total: 5 },
+      { name: 'React & Frontend', icon: 'fab fa-react', tier: 'Working Knowledge', tools: ['Component State', 'Async APIs', 'Next.js'], filled: 3, total: 5 },
+    ],
+  },
 ]
+
+/** Flattened skill list for backward compatibility */
+export const skillRatings: SkillItem[] = skillCapabilities.flatMap((g) => g.skills)
 
 /**
  * Each experience entry can optionally include a `projects` array —
@@ -153,6 +180,8 @@ export const projects = [
   {
     num: '01',
     client: 'PERSONAL PROJECT',
+    iconClass: 'fas fa-network-wired',
+    diagramType: 'taskflow-arch' as const,
     name: 'TaskFlow — Team Task-Board Platform',
     desc: 'Dockerized team task-board platform with a React frontend, two independent Spring Boot microservices, an Nginx API gateway, and per-service PostgreSQL databases.',
     tech: ['Java', 'Spring Boot', 'React', 'PostgreSQL', 'Docker', 'Nginx'],
@@ -162,10 +191,17 @@ export const projects = [
       '🚀 Dockerized across local, free-tier, and production environments with automatic HTTPS via Caddy',
       '🔁 CI/CD-ready workflow with independent service builds and tagged container image deploys',
     ],
+    links: {
+      github: 'https://github.com/aysoni',
+      live: '#projects',
+      caseStudy: '#projects',
+    },
   },
   {
     num: '02',
     client: 'PERSONAL PROJECT',
+    iconClass: 'fas fa-server',
+    diagramType: 'social-arch' as const,
     name: 'Social Media Backend Platform',
     desc: 'RESTful backend microservices for user management, posts, likes, and comments — designed for horizontal scalability and long-term maintainability.',
     tech: ['Java', 'Spring Boot', 'REST API', 'PostgreSQL', 'JUnit'],
@@ -175,6 +211,11 @@ export const projects = [
       '♾️ Stateless REST APIs improving horizontal scalability and long-term maintainability',
       '📄 Server-side pagination & sorting to reduce payload size under load',
     ],
+    links: {
+      github: 'https://github.com/aysoni',
+      live: '#projects',
+      caseStudy: '#projects',
+    },
   },
 ]
 

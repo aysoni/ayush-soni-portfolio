@@ -1,24 +1,21 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { skillRatings } from '@/lib/data'
-import { Reveal } from '@/components/ui/Reveal'
+import { motion } from 'framer-motion'
+import { skillCapabilities, type SkillItem } from '@/lib/data'
+import { cardVariant, fadeInUp, staggerContainer } from '@/lib/motion'
 
-function SkillCard({
-  name,
-  iconClass,
-  filled,
-  total,
-}: {
-  name: string
-  iconClass: string
-  filled: number
-  total: number
-}) {
+function SkillCard({ skill }: { skill: SkillItem }) {
   const rootRef = useRef<HTMLDivElement>(null)
   const [landed, setLanded] = useState(false)
 
   useEffect(() => {
+    // If reduced motion is active, land immediately
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setLanded(true)
+      return
+    }
+
     const el = rootRef.current
     if (!el) return
     const bo = new IntersectionObserver(
@@ -30,33 +27,56 @@ function SkillCard({
           }
         })
       },
-      { threshold: 0.25 }
+      { threshold: 0.2 }
     )
     bo.observe(el)
     return () => bo.disconnect()
   }, [])
 
-  const pct = `${String(filled).padStart(2, '0')}/${total}`
-
   return (
-    <div ref={rootRef} className="skill-card">
+    <motion.div ref={rootRef} variants={cardVariant} className="skill-card">
       <div className="skill-hdr">
         <div className="skill-name-row">
-          <i className={`${iconClass} skill-icon`} />
-          <span className="skill-name">{name}</span>
+          <i className={`${skill.icon} skill-icon`} />
+          <span className="skill-name">{skill.name}</span>
         </div>
-        <span className="skill-pct">{pct}</span>
+        <span
+          className="skill-pct"
+          style={{
+            fontSize: '0.7rem',
+            color: skill.tier === 'Production' ? 'var(--jade)' : 'var(--gold)',
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+          }}
+        >
+          {skill.tier}
+        </span>
       </div>
+
       <div className="balls-row">
-        {Array.from({ length: total }).map((_, i) => (
+        {Array.from({ length: skill.total }).map((_, i) => (
           <div
             key={i}
-            className={`ball${i >= filled ? ' empty' : ''}${landed ? ' landed' : ''}`}
-            style={{ transitionDelay: landed ? `${i * 75 + 200}ms` : undefined }}
+            className={`ball${i >= skill.filled ? ' empty' : ''}${landed ? ' landed' : ''}`}
+            style={{
+              transitionDelay: landed ? `${i * 65 + 150}ms` : undefined,
+              background:
+                skill.tier === 'Production'
+                  ? 'linear-gradient(135deg, var(--jade), #00b377)'
+                  : 'linear-gradient(135deg, var(--gold), #e8a020)',
+            }}
           />
         ))}
       </div>
-    </div>
+
+      <div className="skill-tools-wrap">
+        {skill.tools.map((tool) => (
+          <span key={tool} className="skill-tool-pill">
+            {tool}
+          </span>
+        ))}
+      </div>
+    </motion.div>
   )
 }
 
@@ -67,13 +87,46 @@ export function Skills() {
       <div className="st">
         Technical <span>Skills</span>
       </div>
-      <div className="skills-grid">
-        {skillRatings.map((s) => (
-          <Reveal key={s.name}>
-            <SkillCard name={s.name} iconClass={s.icon} filled={s.filled} total={s.total} />
-          </Reveal>
-        ))}
-      </div>
+
+      {skillCapabilities.map((group) => (
+        <div key={group.tier} className="skill-tier-block">
+          <motion.div
+            className="skill-tier-header"
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <div
+              className={`skill-tier-badge ${
+                group.tier !== 'Production Experience' ? 'working' : ''
+              }`}
+            >
+              <i
+                className={
+                  group.tier === 'Production Experience'
+                    ? 'fas fa-shield-alt'
+                    : 'fas fa-tools'
+                }
+              />{' '}
+              {group.tier}
+            </div>
+            <p className="skill-tier-desc">{group.description}</p>
+          </motion.div>
+
+          <motion.div
+            className="skills-grid"
+            variants={staggerContainer(0.08, 0.04)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            {group.skills.map((s) => (
+              <SkillCard key={s.name} skill={s} />
+            ))}
+          </motion.div>
+        </div>
+      ))}
     </section>
   )
 }

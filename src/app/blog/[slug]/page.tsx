@@ -255,15 +255,9 @@ export default function BlogPost({ params }: Props) {
       </Link>
 
       {/* Tags */}
-
       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
         {post.tags.map(tag => (
-          <span key={tag} style={{
-            fontFamily: 'var(--mono)', fontSize: '0.68rem',
-            color: 'var(--accent)', background: 'rgba(184,245,90,0.08)',
-            border: '1px solid rgba(184,245,90,0.2)',
-            padding: '0.15rem 0.55rem', borderRadius: 3, letterSpacing: '0.05em',
-          }}>{tag}</span>
+          <span key={tag} className="blog-tag">{tag}</span>
         ))}
       </div>
 
@@ -278,7 +272,7 @@ export default function BlogPost({ params }: Props) {
       {/* Meta */}
       <div style={{
         display: 'flex', gap: '1.5rem',
-        fontFamily: 'var(--mono)', fontSize: '0.75rem',
+        fontFamily: 'var(--mono)', fontSize: '0.82rem',
         color: 'var(--muted)', marginBottom: '3rem',
         paddingBottom: '2rem', borderBottom: '1px solid var(--border)',
       }}>
