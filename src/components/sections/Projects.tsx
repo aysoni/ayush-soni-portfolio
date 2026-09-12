@@ -92,7 +92,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       </div>
 
       {/* Proof-of-Work Action Buttons */}
-      <div className="proj-actions">
+      {/* <div className="proj-actions">
         <a
           href={project.links.github}
           target="_blank"
@@ -104,7 +104,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         <a href={project.links.caseStudy} className="proj-btn proj-btn-outline">
           <i className="fas fa-layer-group" /> Architecture Spec
         </a>
-      </div>
+      </div> */}
     </motion.div>
   )
 }
