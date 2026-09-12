@@ -406,13 +406,10 @@ export default function BlogPost({ params }: Props) {
         }}>Get in touch →</Link>
       </div>
       <style>{`
-        .blog-back-link:hover {
-          color: var(--accent) !important;
-        }
-        a[href="/blog"]:hover {
-          color: var(--accent) !important;
-        }
-      `}</style>
+  .blog-back-link:hover {
+    color: var(--accent) !important;
+  }
+`}</style>
     </article>
   )
 }

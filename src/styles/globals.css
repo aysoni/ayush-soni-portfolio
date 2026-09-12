@@ -1522,3 +1522,63 @@ footer {
   color: #b8860b;
   -webkit-text-fill-color: #b8860b;
 }
+
+/* =========================
+   LIGHT MODE — BLOG
+   ========================= */
+
+[data-theme="light"] .blog-card {
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="light"] .blog-card:hover {
+  background: rgba(235, 230, 221, 0.45);
+}
+
+[data-theme="light"] .blog-tag {
+  color: #a16207;
+  background: rgba(184, 134, 11, 0.08);
+  border-color: rgba(184, 134, 11, 0.20);
+}
+
+[data-theme="light"] .blog-date,
+[data-theme="light"] .blog-read-time {
+  color: #475569;
+}
+
+[data-theme="light"] .blog-card h2,
+[data-theme="light"] .blog-card h3 {
+  color: #0f172a;
+}
+
+[data-theme="light"] .blog-card p {
+  color: #475569;
+}
+
+[data-theme="light"] .blog-post {
+  background: var(--bg);
+  color: var(--text);
+}
+
+[data-theme="light"] .blog-post h1,
+[data-theme="light"] .blog-post h2,
+[data-theme="light"] .blog-post h3,
+[data-theme="light"] .blog-post h4 {
+  color: #0f172a;
+}
+
+[data-theme="light"] .blog-post p {
+  color: #475569;
+}
+
+[data-theme="light"] .blog-post blockquote {
+  border-left-color: #d6a21d;
+  color: #475569;
+  background: rgba(235, 230, 221, 0.35);
+}
+
+[data-theme="light"] .blog-post code,
+[data-theme="light"] .blog-post pre {
+  background: #ebe6dd;
+  border-color: rgba(15, 23, 42, 0.10);
+}
