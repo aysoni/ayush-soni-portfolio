@@ -38,10 +38,10 @@
   --bg2: #dfdad1;
   --bg3: #d4cec4;
 
-  --cyan: #0284c7;
+  --cyan: #b8860b;
   --emerald: #059669;
-  --indigo: #6366f1;
-  --accent: #0284c7;
+  --indigo: #8b6f47;
+  --accent: #b8860b;
   --accent2: #059669;
   --gold: #b8860b;
   --jade: #059669;
@@ -52,7 +52,7 @@
 
   --card: #ebe6dd;
   --border: rgba(15, 23, 42, 0.10);
-  --glow: 0 0 40px rgba(2, 132, 199, 0.08);
+  --glow: 0 0 40px rgba(184, 134, 11, 0.10);
 
   --surface: #ebe6dd;
   --surface2: rgba(15, 23, 42, 0.035);
@@ -64,7 +64,7 @@
     #334155 100%
   );
 
-  --nav-bg: rgba(223, 218, 209, 0.90);
+  --nav-bg: rgba(235, 230, 221, 0.92);
 
   --btn-primary-bg: linear-gradient(
     135deg,
