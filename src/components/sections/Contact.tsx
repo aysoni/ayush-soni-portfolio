@@ -15,15 +15,18 @@ const HELP_TOPICS = [
   'Say Hello 👋',
 ]
 
+type FormStatus = 'idle' | 'loading' | 'success' | 'error'
+
 export function Contact() {
   const [selectedTopic, setSelectedTopic] = useState(HELP_TOPICS[0])
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '',
     message: '',
   })
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [copied, setCopied] = useState(false)
+  const [status, setStatus] = useState<FormStatus>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -35,59 +38,59 @@ export function Contact() {
     setSelectedTopic(topic)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setStatus('loading')
+    setErrorMessage('')
 
-    const subjectText = `[Portfolio] ${selectedTopic} - from ${formData.name}`
+    const finalSubject = formData.subject.trim()
+      ? `[Portfolio] ${formData.subject.trim()} - from ${formData.name}`
+      : `[Portfolio Inquiry] ${selectedTopic} - from ${formData.name}`
 
-    const bodyText = [
-      `Hi Ayush,`,
-      '',
-      formData.message.trim(),
-      '',
-      '---',
-      `Sender Name: ${formData.name}`,
-      `Sender Email: ${formData.email}`,
-      `Topic: ${selectedTopic}`,
-    ].join('\n')
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${personal.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          need_help_with: selectedTopic,
+          subject: formData.subject.trim() || selectedTopic,
+          message: formData.message,
+          _subject: finalSubject,
+          _captcha: 'false',
+          _template: 'table',
+        }),
+      })
 
-    const mailtoUrl = `mailto:${personal.email}?subject=${encodeURIComponent(
-      subjectText
-    )}&body=${encodeURIComponent(bodyText)}`
+      const data = await response.json().catch(() => null)
 
-    // Trigger email client
-    window.location.href = mailtoUrl
-    setIsSubmitted(true)
-  }
-
-  const handleCopyMessage = () => {
-    const subjectText = `[Portfolio] ${selectedTopic} - from ${formData.name}`
-
-    const fullDetails = [
-      `To: ${personal.email}`,
-      `Subject: ${subjectText}`,
-      '',
-      `Hi Ayush,`,
-      '',
-      formData.message.trim(),
-      '',
-      '---',
-      `Sender Name: ${formData.name}`,
-      `Sender Email: ${formData.email}`,
-      `Topic: ${selectedTopic}`,
-    ].join('\n')
-
-    navigator.clipboard.writeText(fullDetails).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2500)
-    })
+      if (response.ok && data && (data.success === 'true' || data.success === true)) {
+        setStatus('success')
+      } else {
+        throw new Error(data?.message || 'Could not deliver message automatically.')
+      }
+    } catch (err: unknown) {
+      console.error('Contact form error:', err)
+      setStatus('error')
+      setErrorMessage(
+        err instanceof Error && err.message
+          ? err.message
+          : 'Unable to deliver message right now. Please try again or reach out directly.'
+      )
+    }
   }
 
   const handleReset = () => {
-    setIsSubmitted(false)
+    setStatus('idle')
+    setErrorMessage('')
     setFormData({
       name: '',
       email: '',
+      subject: '',
       message: '',
     })
   }
@@ -106,23 +109,25 @@ export function Contact() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
       >
-        {/* Left Column: Direct Info & Availability */}
-        <motion.div className="contact-info-col" variants={cardVariant}>
-          <p className="contact-desc">
-            I&apos;m open to backend engineering roles, microservices architecture, and technical
-            collaborations. Whether you have an open position, an engineering project in mind, or just want to
-            say hello — my inbox is always open.
-          </p>
+        {/* Left Column: Direct Info & Availability Card */}
+        <motion.div className="contact-info-card" variants={cardVariant}>
+          <div>
+            <p className="contact-desc">
+              I&apos;m open to backend engineering roles, microservices architecture, and technical
+              collaborations. Whether you have an open position, an engineering project in mind, or just want to
+              say hello — my inbox is always open.
+            </p>
 
-          {/* Status badge */}
-          <div className="contact-status-card">
-            <span className="status-indicator">
-              <span className="status-dot" />
-              <span className="status-pulse" />
-            </span>
-            <div>
-              <div className="status-title">Available for opportunities</div>
-              <div className="status-sub">Backend Engineering • Distributed Systems</div>
+            {/* Status badge */}
+            <div className="contact-status-card" style={{ marginTop: '14px' }}>
+              <span className="status-indicator">
+                <span className="status-dot" />
+                <span className="status-pulse" />
+              </span>
+              <div>
+                <div className="status-title">Available for opportunities</div>
+                <div className="status-sub">Backend Engineering • Distributed Systems</div>
+              </div>
             </div>
           </div>
 
@@ -197,35 +202,36 @@ export function Contact() {
             </div>
           </div>
 
-          {isSubmitted ? (
+          {status === 'success' ? (
             <div className="form-success-alert">
               <div className="success-header">
                 <i className="fas fa-check-circle" />
-                <span>Message Ready in Email Client</span>
+                <span>Message Sent Successfully!</span>
               </div>
               <p className="success-body">
-                Your email client was prompted to send this message to <strong>{personal.email}</strong>. If your email app did not open automatically, you can copy the full message details below or reset the form.
+                Thank you, <strong>{formData.name}</strong>! Your message regarding{' '}
+                <strong>{formData.subject.trim() || selectedTopic}</strong> has been sent directly to{' '}
+                <strong>{personal.email}</strong>. I will get back to you shortly.
               </p>
               <div className="success-actions">
                 <button
                   type="button"
                   className="btn-copy-msg"
-                  onClick={handleCopyMessage}
-                >
-                  <i className={`fas ${copied ? 'fa-check' : 'fa-copy'}`} />
-                  {copied ? 'Copied to Clipboard!' : 'Copy Message Details'}
-                </button>
-                <button
-                  type="button"
-                  className="btn-reset-form"
                   onClick={handleReset}
                 >
-                  Send another message
+                  <i className="fas fa-paper-plane" /> Send another message
                 </button>
               </div>
             </div>
           ) : (
             <form className="contact-form" onSubmit={handleSubmit}>
+              {status === 'error' && (
+                <div className="form-error-alert">
+                  <i className="fas fa-exclamation-circle" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="contact-name" className="form-label">
@@ -241,6 +247,7 @@ export function Contact() {
                     placeholder="e.g. Alex Morgan"
                     className="form-input"
                     autoComplete="name"
+                    disabled={status === 'loading'}
                   />
                 </div>
 
@@ -258,6 +265,7 @@ export function Contact() {
                     placeholder="e.g. alex@company.com"
                     className="form-input"
                     autoComplete="email"
+                    disabled={status === 'loading'}
                   />
                 </div>
               </div>
@@ -272,6 +280,7 @@ export function Contact() {
                     <button
                       type="button"
                       key={topic}
+                      disabled={status === 'loading'}
                       className={`help-topic-pill ${
                         selectedTopic === topic ? 'active' : ''
                       }`}
@@ -283,6 +292,23 @@ export function Contact() {
                 </div>
               </div>
 
+              {/* Subject */}
+              <div className="form-group">
+                <label htmlFor="contact-subject" className="form-label">
+                  Subject (Optional)
+                </label>
+                <input
+                  id="contact-subject"
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder={`e.g. ${selectedTopic} inquiry`}
+                  className="form-input"
+                  disabled={status === 'loading'}
+                />
+              </div>
+
               <div className="form-group">
                 <label htmlFor="contact-message" className="form-label">
                   Message <span>*</span>
@@ -291,20 +317,33 @@ export function Contact() {
                   id="contact-message"
                   name="message"
                   required
-                  rows={3}
+                  rows={2}
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Describe your project, team, timeline, or requirements..."
                   className="form-textarea"
+                  disabled={status === 'loading'}
                 />
               </div>
 
-              <button type="submit" className="btn-g contact-submit-btn">
-                <i className="fas fa-paper-plane" /> Send Message
+              <button
+                type="submit"
+                className="btn-g contact-submit-btn"
+                disabled={status === 'loading'}
+              >
+                {status === 'loading' ? (
+                  <>
+                    <i className="fas fa-circle-notch fa-spin" /> Sending...
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-paper-plane" /> Send Message
+                  </>
+                )}
               </button>
 
               <div className="form-note">
-                <i className="fas fa-lock" /> Your message is sent directly to {personal.email}
+                <i className="fas fa-lock" /> Sends directly to {personal.email}
               </div>
             </form>
           )}
