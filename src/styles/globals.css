@@ -1506,6 +1506,7 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin: auto 0;
 }
 
 .success-header {
