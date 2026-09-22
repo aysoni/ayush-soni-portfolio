@@ -20,7 +20,6 @@ export function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
     message: '',
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -39,8 +38,7 @@ export function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const subjectText =
-      formData.subject.trim() || `[Portfolio] ${selectedTopic} - from ${formData.name}`
+    const subjectText = `[Portfolio] ${selectedTopic} - from ${formData.name}`
 
     const bodyText = [
       `Hi Ayush,`,
@@ -63,8 +61,7 @@ export function Contact() {
   }
 
   const handleCopyMessage = () => {
-    const subjectText =
-      formData.subject.trim() || `[Portfolio] ${selectedTopic} - from ${formData.name}`
+    const subjectText = `[Portfolio] ${selectedTopic} - from ${formData.name}`
 
     const fullDetails = [
       `To: ${personal.email}`,
@@ -91,7 +88,6 @@ export function Contact() {
     setFormData({
       name: '',
       email: '',
-      subject: '',
       message: '',
     })
   }
@@ -288,21 +284,6 @@ export function Contact() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="contact-subject" className="form-label">
-                  Subject (Optional)
-                </label>
-                <input
-                  id="contact-subject"
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder={`e.g. ${selectedTopic} inquiry`}
-                  className="form-input"
-                />
-              </div>
-
-              <div className="form-group">
                 <label htmlFor="contact-message" className="form-label">
                   Message <span>*</span>
                 </label>
@@ -310,7 +291,7 @@ export function Contact() {
                   id="contact-message"
                   name="message"
                   required
-                  rows={4}
+                  rows={3}
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Describe your project, team, timeline, or requirements..."
