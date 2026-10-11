@@ -23,10 +23,10 @@ export const typedPhrases = [
 ]
 
 export const heroStats = [
-  { value: '2.8+', label: 'Years Exp.' },
-  { value: '15+', label: 'Projects' },
-  { value: '30%', label: 'API Latency ↓' },
-  { value: '500+', label: 'Commits' },
+  { value: '~3', label: 'Years Exp.' },
+  { value: '20+', label: 'Projects' },
+  { value: '35%', label: 'API Latency ↓' },
+  { value: '700+', label: 'Commits' },
 ]
 
 export const stats = [
