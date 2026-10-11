@@ -30,10 +30,10 @@ export const heroStats = [
 ]
 
 export const stats = [
-  { label: 'Experience', value: '2.8+', description: 'Years in production systems' },
-  { label: 'Projects', value: '10+', description: 'Live enterprise applications' },
-  { label: 'Skills', value: '15+', description: 'Production technologies' },
-  { label: 'Commits', value: '5K+', description: 'Active development' },
+  { label: 'Experience', value: '~3', description: 'Years in production systems' },
+  { label: 'Projects', value: '20+', description: 'Live enterprise applications' },
+  { label: 'Skills', value: '25+', description: 'Production technologies' },
+  { label: 'Commits', value: '7K+', description: 'Active development' },
 ]
 
 export const aboutParagraphs = [
